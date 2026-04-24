@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Models\Book;
 
-class GenreController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $genres = Genre::all();
+        $books = Book::all();
 
-        return view('genres.index', compact('genres'));
+        return view('books.index',compact('books'));
     }
 
     /**
@@ -36,7 +36,7 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Genre $genre)
+    public function show(string $id)
     {
         //
     }
@@ -44,7 +44,7 @@ class GenreController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Genre $genre)
+    public function edit(string $id)
     {
         //
     }
@@ -52,7 +52,7 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Genre $genre)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -60,7 +60,7 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(string $id)
     {
         //
     }

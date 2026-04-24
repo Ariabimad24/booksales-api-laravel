@@ -88,25 +88,26 @@
         <h1>Daftar Table Data Genre</h1>
         <table>
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($genres as $item)
-                <tr>
-                    <td>{{ $item['id'] }}</td>
-                    <td>{{ $item['name'] }}</td>
-                    <td>{{ $item['description'] }}</td>
-                </tr>
-                @endforeach
-            </tbody>
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach ($genres as $index => $item)
+    <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ $item->name }}</td>
+        <td>{{ $item->description }}</td>
+    </tr>
+    @endforeach
+</tbody>
         </table>
         <br>
-        <div style="text-align: center">
+        <div style="text-align: center; display: flex; justify-content: center; gap: 16px;">
             <a href="{{ route('authors.index') }}" style="text-decoration: none">Ke Data Author</a>
+            <a href="{{ route('books.index') }}" style="text-decoration: none">Ke Data Buku</a>
         </div>
     </div>
 </body>

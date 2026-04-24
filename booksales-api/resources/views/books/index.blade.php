@@ -87,23 +87,31 @@
 
 <body>
     <div class="container">
-        <h1>Daftar Table Data Author</h1>
+        <h1>Daftar Table Data Buku</h1>
         <table>
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Photo</th>
-                    <th>Bio</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Cover</th>
+                    <th>Genre</th>
+                    <th>Author</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($authors as $index => $item)
+                @foreach ($books as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td><img src="{{ $item->photo }}" alt="{{ $item->name }}" width="60"></td>
-                        <td>{{ $item->bio }}</td>
+                        <td>{{ $item->title }}</td>
+                        <td>{{ $item->description }}</td>
+                        <td>Rp {{ number_format($item->price, 0, ',', '.') }}</td>
+                        <td>{{ $item->stock }}</td>
+                        <td><img src="{{ $item->cover_photo }}" alt="{{ $item->title }}" width="60"></td>
+                        <td>{{ $item->genre->name }}</td>
+                        <td>{{ $item->author->name }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -111,7 +119,7 @@
         <br>
         <div style="text-align: center; display: flex; justify-content: center; gap: 16px;">
             <a href="{{ route('genres.index') }}" style="text-decoration: none">Ke Data Genre</a>
-            <a href="{{ route('books.index') }}" style="text-decoration: none">Ke Data Buku</a>
+            <a href="{{ route('authors.index') }}" style="text-decoration: none">Ke Data Author</a>
         </div>
     </div>
 </body>
