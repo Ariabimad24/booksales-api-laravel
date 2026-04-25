@@ -14,7 +14,11 @@ class BookController extends Controller
     {
         $books = Book::all();
 
-        return view('books.index',compact('books'));
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil mengambil semua data buku',
+            'data' => $books,
+        ]);
     }
 
     /**
