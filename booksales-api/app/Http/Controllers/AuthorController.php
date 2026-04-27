@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAuthorRequest;
+use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreAuthorRequest;
 
 class AuthorController extends Controller
 {
@@ -52,7 +53,11 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => "Berhasil mengambil data author id {$author->id}",
+            'data' => $author,
+        ]);
     }
 
     /**
@@ -66,9 +71,17 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author)
+    public function update(UpdateAuthorRequest $request, Author $author)
     {
-        //
+        $validated = $request->validated();
+
+        $author->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil mengupdate data author!',
+            'data' => $author->refresh(),
+        ]);
     }
 
     /**
@@ -76,6 +89,15 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        // Snapshot data yg sudah di delete jika ingin ditampilkan data setelah terhapus
+        $snapshot = $author->toArray();
+
+        $author->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil menghapus data author!',
+            'data' => $snapshot,
+        ]);
     }
 }

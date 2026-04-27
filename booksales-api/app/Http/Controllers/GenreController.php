@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Genre;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
+use App\Models\Genre;
 
 class GenreController extends Controller
 {
@@ -51,7 +51,11 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'message' => "Berhasil mengambil data genre id {$genre->id}",
+            'data' => $genre,
+        ]);
     }
 
     /**
@@ -65,9 +69,17 @@ class GenreController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Genre $genre)
+    public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        $validated = $request->validated();
+
+        $genre->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil mengupdate data genre!',
+            'data' => $genre->refresh(),
+        ]);
     }
 
     /**
@@ -75,6 +87,15 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        // Snapshot data yg sudah di delete jika ingin ditampilkan data setelah terhapus
+        $snapshot = $genre->toArray();
+
+        $genre->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil menghapus data genre!',
+            'data' => $snapshot,
+        ]);
     }
 }
