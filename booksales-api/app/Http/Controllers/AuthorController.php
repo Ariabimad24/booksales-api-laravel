@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAuthorRequest;
 
 class AuthorController extends Controller
 {
@@ -33,9 +34,17 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAuthorRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $author = Author::create($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil membuat data author!',
+            'data' => $author,
+        ]);
     }
 
     /**

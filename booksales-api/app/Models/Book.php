@@ -8,7 +8,7 @@ use App\Models\Author;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'description', 'price', 'stock', 'cover_photo_url', 'genre_id', 'author_id'];
+    protected $fillable = ['title', 'description', 'price', 'stock', 'cover_photo', 'genre_id', 'author_id'];
 
     public function genre()
     {

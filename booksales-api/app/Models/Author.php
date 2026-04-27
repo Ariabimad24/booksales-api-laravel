@@ -7,7 +7,7 @@ use App\Models\Book;
 
 class Author extends Model
 {
-    protected $fillable = ['name', 'photo_url', 'bio'];
+    protected $fillable = ['name', 'photo', 'bio'];
 
     public function books()
     {

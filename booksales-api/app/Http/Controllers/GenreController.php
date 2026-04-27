@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreGenreRequest;
 
 class GenreController extends Controller
 {
@@ -32,9 +33,17 @@ class GenreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGenreRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $genre = Genre::create($validated);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Berhasil membuat data genre!',
+            'data' => $genre,
+        ]);
     }
 
     /**
